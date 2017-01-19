@@ -1,0 +1,114 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{gphys}[2017/01/18 Génie Physique]
+
+\RequirePackage{ifthen}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+
+% différentielle de la forme
+%
+%             d x^n
+%
+% où
+%     paramètre 1 : x
+%     paramètre 2 : n (défaut=1)
+\renewcommand\d[2][1]{%
+	\ensuremath{%
+		\ifthenelse{\equal{#1}{1}}%
+			{\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
+			{\mathop{\mathrm{d}^#1#2}\@ifnextchar\d{\!}{}}%
+	}%
+}%
+
+% différentielle de la forme
+%
+%             d^n x
+%
+% où
+%     paramètre 1 : x
+%     paramètre 2 : n (défaut=1)
+\newcommand\D[2][1]{%
+	\ensuremath{%
+		\ifthenelse{\equal{#1}{1}}%
+			{\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
+			{\mathop{\mathrm{d}#2^#1}\@ifnextchar\d{\!}{}}%
+	}%
+}%
+
+% différentielle partielle de la forme
+%
+%             d x^n
+%
+% où
+%     paramètre 1 : x
+%     paramètre 2 : n (défaut=1)
+\newcommand\p[2][1]{%
+	\ensuremath{%
+		\ifthenelse{\equal{#1}{1}}%
+			{\mathop{\partial #2}}%
+			{\mathop{\partial ^#1#2}}%
+	}%
+}%
+
+% différentielle partielle de la forme
+%
+%             d^n x
+%
+% où
+%     paramètre 1 : x
+%     paramètre 2 : n (défaut=1)
+\renewcommand\P[2][1]{%
+	\ensuremath{%
+		\ifthenelse{\equal{#1}{1}}%
+			{\mathop{\partial #2}}%
+			{\mathop{\partial #2^#1}}%
+	}%
+}%
+
+\newcounter{@auteurs}
+\newcounter{@professeurs}
+
+% défini un nouveau auteur
+%
+% où
+%     paramètre 1 : prénom
+%     paramètre 2 : nom
+%     paramètre 3 : matricule
+\newcommand\AjouterAuteur[3]{%
+    \stepcounter{@auteurs}%
+    \csdef{AuteurPrenom\the@auteurs}{#1}%
+    \csdef{AuteurNom\the@auteurs}{#2}%
+    \csdef{AuteurMatricule\the@auteurs}{#3}%
+}
+
+% défini un nouveau professeur
+%
+% où
+%     paramètre 1 : préfix
+%     paramètre 2 : prénom
+%     paramètre 3 : nom
+\newcommand\AjouterProfesseur[3]{%
+    \stepcounter{@professeurs}%
+    \csdef{ProfPrefix\the@professeurs}{#1}%
+    \csdef{ProfPrenom\the@professeurs}{#2}%
+    \csdef{ProfNom\the@professeurs}{#3}%
+}
+
+\newcommand\@PrintAuteur[1]{%
+	    \textit{\csuse{AuteurPrenom#1} \csuse{AuteurNom#1}} %
+	    (\texttt{\csuse{AuteurMatricule#1}})%
+	\par%
+}%
+
+\newcommand\pagetitre{%
+	\input{pagetitre}%
+}%
+
+\newcommand\@PrintProfesseur[1]{%
+	    \csuse{ProfPrefix#1} %
+		\csuse{ProfPrenom#1} %
+		\textsc{\csuse{ProfNom#1}}%
+	\par%
+}%
+
+\endinput

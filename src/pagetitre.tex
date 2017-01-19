@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{standalone}
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usepackage{gphys}
+
+\AjouterAuteur{prénom1}{nom1}{matricule1}
+\AjouterAuteur{prénom2}{nom2}{matricule2}
+\AjouterAuteur{prénom3}{nom3}{matricule3}
+\AjouterAuteur{prénom4}{nom4}{matricule4}
+
+\AjouterProfesseur{prefix1}{prénom1}{nom1}
+\AjouterProfesseur{prefix1}{prénom2}{nom2}
+
+\begin{document}
+
+\newcounter{icounter}
+\begin{titlepage}
+    \centering
+    \input{poly}\par\vspace{0cm}
+    {\scshape\LARGE Polytechnique de Montréal\par}
+	\vspace{2cm}
+	{\scshape\large\ifdef{\Sigle}{\Sigle}{Sigle à définir}\par}
+	{\scshape\large\ifdef{\Cours}{\Cours}{Cours à définir}\par}
+	\vspace{2cm}
+	{\Large\bfseries\ifdef{\Devoir}{\Devoir}{Devoir à définir}\par}
+	\vspace{2cm}
+
+	\makeatletter
+	\setcounter{icounter}{0}
+	\loop\ifnum\value{icounter}<\value{@auteurs}
+  		\stepcounter{icounter}
+		\@PrintAuteur{\theicounter}
+	\repeat
+	\makeatother
+
+	\vfill
+	Remis à\par
+
+	\makeatletter
+	\setcounter{icounter}{0}
+	\loop\ifnum\value{icounter}<\value{@professeurs}
+  		\stepcounter{icounter}
+		\@PrintProfesseur{\theicounter}
+	\repeat
+	\makeatother
+
+	\vfill
+	{\ifdef{\Date}{\Date}{\large\today\par}}
+\end{titlepage}
+\end{document}
