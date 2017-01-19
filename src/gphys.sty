@@ -13,11 +13,11 @@
 %     paramètre 1 : x
 %     paramètre 2 : n (défaut=1)
 \renewcommand\d[2][1]{%
-	\ensuremath{%
-		\ifthenelse{\equal{#1}{1}}%
-			{\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
-			{\mathop{\mathrm{d}^#1#2}\@ifnextchar\d{\!}{}}%
-	}%
+    \ensuremath{%
+        \ifthenelse{\equal{#1}{1}}%
+            {\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
+            {\mathop{\mathrm{d}^#1#2}\@ifnextchar\d{\!}{}}%
+    }%
 }%
 
 % différentielle de la forme
@@ -28,11 +28,11 @@
 %     paramètre 1 : x
 %     paramètre 2 : n (défaut=1)
 \newcommand\D[2][1]{%
-	\ensuremath{%
-		\ifthenelse{\equal{#1}{1}}%
-			{\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
-			{\mathop{\mathrm{d}#2^#1}\@ifnextchar\d{\!}{}}%
-	}%
+    \ensuremath{%
+        \ifthenelse{\equal{#1}{1}}%
+            {\mathop{\mathrm{d}#2}\@ifnextchar\d{\!}{}}%
+            {\mathop{\mathrm{d}#2^#1}\@ifnextchar\d{\!}{}}%
+    }%
 }%
 
 % différentielle partielle de la forme
@@ -43,11 +43,11 @@
 %     paramètre 1 : x
 %     paramètre 2 : n (défaut=1)
 \newcommand\p[2][1]{%
-	\ensuremath{%
-		\ifthenelse{\equal{#1}{1}}%
-			{\mathop{\partial #2}}%
-			{\mathop{\partial ^#1#2}}%
-	}%
+    \ensuremath{%
+        \ifthenelse{\equal{#1}{1}}%
+            {\mathop{\partial #2}}%
+            {\mathop{\partial ^#1#2}}%
+    }%
 }%
 
 % différentielle partielle de la forme
@@ -58,11 +58,11 @@
 %     paramètre 1 : x
 %     paramètre 2 : n (défaut=1)
 \renewcommand\P[2][1]{%
-	\ensuremath{%
-		\ifthenelse{\equal{#1}{1}}%
-			{\mathop{\partial #2}}%
-			{\mathop{\partial #2^#1}}%
-	}%
+    \ensuremath{%
+        \ifthenelse{\equal{#1}{1}}%
+            {\mathop{\partial #2}}%
+            {\mathop{\partial #2^#1}}%
+    }%
 }%
 
 \newcounter{@auteurs}
@@ -94,21 +94,34 @@
     \csdef{ProfNom\the@professeurs}{#3}%
 }
 
-\newcommand\@PrintAuteur[1]{%
-	    \textit{\csuse{AuteurPrenom#1} \csuse{AuteurNom#1}} %
-	    (\texttt{\csuse{AuteurMatricule#1}})%
-	\par%
+% template basic pour une page titre
+%
+% \def\Sigle{}
+% \def\Cours{}
+% \def\Devoir{}
+% \def\Data{} (défaut=\today)
+% \AjouterAuteur{}{}{}
+% \AjouterProfesseur{}{}{}
+%
+\newcommand\pagetitre{%
+    \input{pagetitre}%
 }%
 
-\newcommand\pagetitre{%
-	\input{pagetitre}%
+%--------------------%
+% commandes internes %
+%--------------------%
+
+\newcommand\@PrintAuteur[1]{%
+        \textit{\csuse{AuteurPrenom#1} \csuse{AuteurNom#1}} %
+        (\texttt{\csuse{AuteurMatricule#1}})%
+    \par%
 }%
 
 \newcommand\@PrintProfesseur[1]{%
-	    \csuse{ProfPrefix#1} %
-		\csuse{ProfPrenom#1} %
-		\textsc{\csuse{ProfNom#1}}%
-	\par%
+        \csuse{ProfPrefix#1} %
+        \csuse{ProfPrenom#1} %
+        \textsc{\csuse{ProfNom#1}}%
+    \par%
 }%
 
 \endinput
