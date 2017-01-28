@@ -1,13 +1,15 @@
-\documentclass{article}
+
+\documentclass{standalone}
+\usepackage{standalone}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
-\usepackage{standalone}
 
+\def\logoscale{1}
 \begin{document}
 \definecolor{c231f20}{RGB}{35,31,32}
 
 
-\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, scale=\logoscale, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]
 \begin{scope}[cm={{1.25,0.0,0.0,-1.25,(-50.46046,150.7375)}}]
   \path[fill=c231f20,nonzero rule] (93.7051,95.8094) .. controls (93.6992,95.8195)
     and (93.6715,95.8211) .. (93.6637,95.8117) .. controls (93.4957,95.6211) and
